@@ -32,5 +32,5 @@ jobs:
       jobs:
         - bulild
         - test:
-          requires:
-            - build
+            requires:
+              - build
