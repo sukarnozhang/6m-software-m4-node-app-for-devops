@@ -30,7 +30,7 @@ jobs:
   workflows:
     simple_workflow:
       jobs:
-        - bulild
+        - build
         - test:
             requires:
               - build
