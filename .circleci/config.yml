@@ -15,4 +15,22 @@ jobs:
           echo "Installin g dep..."
           npm install
   test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run: |
+          echo "running test...."
+          npm test
   optional_publish:
+    #Assignment
+  
+  workflows:
+    simple_workflow:
+      jobs:
+        - bulild
+        - test:
+          requires:
+            - build
