@@ -61,7 +61,6 @@ workflows:
           requires:
             - build
       - build-and-push:
-          context: docker
           requires:
             - test
       - deploy:
