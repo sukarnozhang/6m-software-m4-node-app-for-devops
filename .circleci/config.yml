@@ -41,7 +41,7 @@ jobs:
             docker push sukarno/assignment:latest
   deploy:
     docker:
-      - image: cimg/node/16.10
+      - image: cimg/node:16.10
     steps:
       - setup_remote_docker
       - heroku/install
