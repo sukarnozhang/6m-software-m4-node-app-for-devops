@@ -31,10 +31,13 @@ jobs:
       - image: cimg/node:16.10
     steps:
       - checkout
-      - run: |
-          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-          docker image tag assignment:latest sukarno/assignment:latest
-          docker push sukarno/assignment:latest
+      - setup_remote_docker
+      - run:
+          command: echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+      -run:
+          command: docker image tag assignment:latest sukarno/assignment:latest
+      -run:
+          command: docker push sukarno/assignment:latest
   
 workflows:
   simple_workflow:
