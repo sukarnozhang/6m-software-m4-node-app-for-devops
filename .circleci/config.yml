@@ -51,7 +51,7 @@ jobs:
           command: |
             heroku container:login
             heroku container:push web -a sukarno-su-ops
-            heroku conyaoner:release web -a sukarno-su-ops
+            heroku container:release web -a sukarno-su-ops
 
 workflows:
   simple_workflow:
@@ -67,4 +67,4 @@ workflows:
       - deploy:
           context: heroku
           requires:
-            - build-and-push
+            - test
