@@ -4,6 +4,7 @@ orbs:
   node: circleci/node@5.0.1
   #to import docker
   docker: circleci/docker@2.4.0
+  heroku: circleci/heroku@2.0.0
 
 jobs:
   build:
@@ -38,6 +39,20 @@ jobs:
             docker build -t "assignment" .
             docker image tag assignment:latest sukarno/assignment:latest
             docker push sukarno/assignment:latest
+  deploy:
+    docker:
+      - image: cimg/node/16.10
+    steps:
+      - setup_remote_docker
+      - heroku/install
+      - checkout
+      - run:
+          name: Heroku Container Push
+          command: |
+            heroku container:login
+            heroku container:push web -a sukarno-su-ops
+            heroku conyaoner:release web -a sukarno-su-ops
+
 workflows:
   simple_workflow:
     jobs:
@@ -49,3 +64,6 @@ workflows:
           context: docker
           requires:
             - test
+      - deploy
+          requires:
+            - build-and-push
