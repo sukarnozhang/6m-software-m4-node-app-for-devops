@@ -37,7 +37,7 @@ jobs:
       - docker/check
       - docker/build:
           image: sukarno/assignment:latest
-      - docker-push:
+      - docker/push:
           image: sukarno/assignment:latest
       # - run:
       #     command: |
