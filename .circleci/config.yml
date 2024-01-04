@@ -39,19 +39,33 @@ jobs:
       - docker/push:
           image: sukarno/assignment
           tag: v3.4.5
-  deploy:
+  # deploy:
+  #   docker:
+  #     - image: cimg/node:16.10
+  #   steps:
+  #     - setup_remote_docker
+  #     - heroku/install
+  #     - checkout
+  #     - run:
+  #         name: Heroku Container Push
+  #         command: |
+  #           heroku container:login
+  #           heroku container:push web -a sukarno-su-ops
+  #           heroku container:release web -a sukarno-su-ops
+  pull-and-deploy:
     docker:
-      - image: cimg/node:16.10
+      - image: cimg/node:16.0
     steps:
-      - setup_remote_docker
+      - setup_remote_worker
       - heroku/install
-      - checkout
+      - docker/pull:
+          image: sukarno/assignment
+          tag: v3.4.5
       - run:
-          name: Heroku Container Push
+          name: Heroku From Docker Hub
           command: |
             heroku container:login
-            heroku container:push web -a sukarno-su-ops
-            heroku container:release web -a sukarno-su-ops
+            docker tag sukarno/assignment:v.3.4.5 registry.heroku.com/sukarno-su-devops/web
 
 workflows:
   simple_workflow:
@@ -65,4 +79,4 @@ workflows:
             - test
       - deploy:
           requires:
-            - test
+            - build
