@@ -65,6 +65,5 @@ workflows:
           requires:
             - test
       - deploy:
-          context: heroku
           requires:
             - test
