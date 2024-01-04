@@ -15,7 +15,7 @@ jobs:
       - node/install-packages:
         pkg-manager: npm
       - run: |
-          echo "Installin g dep..."
+          echo "Installing dep..."
           npm install
   test:
     docker:
