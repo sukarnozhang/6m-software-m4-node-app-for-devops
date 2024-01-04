@@ -38,7 +38,7 @@ jobs:
           tag: latest
       - docker/push:
           image: sukarno/assignment
-          tag: v.3.4.5
+          tag: v3.4.5
   deploy:
     docker:
       - image: cimg/node:16.10
