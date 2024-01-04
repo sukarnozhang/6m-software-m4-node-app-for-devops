@@ -35,7 +35,7 @@ jobs:
       - docker/check
       - docker/build:
           image: sukarno/assignment
-          tag: latest
+          tag: v3.4.5
       - docker/push:
           image: sukarno/assignment
           tag: v3.4.5
