@@ -28,17 +28,23 @@ jobs:
           echo "running test...."
           npm test
   build-and-push:
-    docker:
-      - image: cimg/node:16.10
+    executor: docker/docker
+    #docker:
+    #  - image: cimg/node:16.10
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          command: |
-            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-            docker build -t "assignment" .
-            docker image tag assignment:latest sukarno/assignment:latest
-            docker push sukarno/assignment:latest
+      - docker/check
+      - docker/build:
+          image: sukarno/assignment:latest
+      - docker-push:
+          image: sukarno/assignment:latest
+      # - run:
+      #     command: |
+      #       echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+      #       docker build -t "assignment" .
+      #       docker image tag assignment:latest sukarno/assignment:latest
+      #       docker push sukarno/assignment:latest
   deploy:
     docker:
       - image: cimg/node:16.10
