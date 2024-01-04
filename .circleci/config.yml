@@ -31,7 +31,6 @@ jobs:
       - image: cimg/node:16.10
     steps:
       - checkout
-      - setup_remote_worker
       - run: |
           echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
           docker build -t sukarno/assignment:tag .
