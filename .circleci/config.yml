@@ -34,6 +34,8 @@ jobs:
       - setup_remote_worker
       - run: |
           echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+          docker build -t sukarno/assignment:tag .
+          docker push sukarno/assignment:tag
   
 workflows:
   simple_workflow:
@@ -42,3 +44,6 @@ workflows:
       - test:
           requires:
             - build
+      - build-and-push:
+          requires:
+            - test
