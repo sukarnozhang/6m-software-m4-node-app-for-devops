@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.1
   #to import docker
-  #docker: circleci/docker@2.4.0
+  docker: circleci/docker@2.4.0
 
 jobs:
   build:
