@@ -64,7 +64,7 @@ jobs:
           name: Heroku From Docker Hub
           command: |
             heroku container:login
-            docker tag sukarno/assignment:v.3.4.5 registry.heroku.com/sukarno-su-devops/web
+            docker tag sukarno/assignment:v3.4.5 registry.heroku.com/sukarno-su-devops/web
             docker push registry.heroku.com/sukarno-su-devops/web
             heroku container:release web -a sukarno-su-devops
 
