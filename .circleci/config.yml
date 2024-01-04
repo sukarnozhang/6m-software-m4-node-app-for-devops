@@ -35,6 +35,7 @@ jobs:
       - run:
           command: |
             echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+            docker build "assignment" .
             docker image tag assignment:latest sukarno/assignment:latest
             docker push sukarno/assignment:latest
 workflows:
