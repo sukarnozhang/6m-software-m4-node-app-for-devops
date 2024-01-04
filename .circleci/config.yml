@@ -25,7 +25,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: |
-          echo "running test...."
+          echo "running te st...."
           npm test
   build-and-push:
     executor: docker/docker
@@ -34,9 +34,9 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: sukarno/assignment
+          image: sukarno/assignment:latest
       - docker/push:
-          image: sukarno/assignment
+          image: sukarno/assignment:latest
   deploy:
     docker:
       - image: cimg/node:16.10
