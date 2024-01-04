@@ -59,8 +59,7 @@ jobs:
       - setup_remote_docker
       - heroku/install
       - docker/pull:
-          image: sukarno/assignment
-          tag: v3.4.5
+          image: sukarno/assignment:v3.4.5
       - run:
           name: Heroku From Docker Hub
           command: |
