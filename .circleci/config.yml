@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.1
   #to import docker
-  docker: circleci/docker@2.4.0
+  #docker: circleci/docker@2.4.0
 
 jobs:
   build:
@@ -26,8 +26,14 @@ jobs:
       - run: |
           echo "running test...."
           npm test
-  #optional_publish:
-    #Assignment
+  build-and-push:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - setup_remote_worker
+      - run: |
+          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
   
 workflows:
   simple_workflow:
