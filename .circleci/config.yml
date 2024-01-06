@@ -25,7 +25,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: |
-          echo "running t   st...."
+          echo "running test...."
           npm test
   build-and-push:
     executor: docker/docker
