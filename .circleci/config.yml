@@ -86,6 +86,10 @@ workflows:
       - build-and-push:
           requires:
             - test
+          filters:
+            tags:
+              only:
+                - /^v\d+\.\d+\.\d+/
       - pull-and-deploy:
           requires:
             - build-and-push
