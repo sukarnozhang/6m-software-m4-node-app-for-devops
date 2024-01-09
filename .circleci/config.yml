@@ -5,6 +5,7 @@ orbs:
   #to import docker
   docker: circleci/docker@2.4.0
   heroku: circleci/heroku@2.0.0
+  snyk: snyk/snyk@1.5.0
 
 jobs:
   build:
@@ -27,6 +28,20 @@ jobs:
       - run: |
           echo "running test...."
           npm test
+
+  scan:
+    docker:
+      - image: cimg/node:16.10
+    environment:
+      IMAGE_NAME: sukarno/assignment
+    steps:
+      - checkout
+      - setup_remote_docker
+      - docker/check
+      - run: docker build -t $IMAGE_NAME .
+      - snyk/scan:
+          docker-image-name: $IMAGE_NAME
+          
   build-and-push:
     executor: docker/docker
     steps:
@@ -83,9 +98,12 @@ workflows:
             branches:
               only:
                 - main
-      - build-and-push:
+      - scan :
           requires:
             - test
+      - build-and-push:
+          requires:
+            - scan
           filters:
             tags:
               only:
