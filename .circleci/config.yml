@@ -26,7 +26,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: |
-          echo "running test...."
+          echo "running  test...."
           npm test
 
   scan:
@@ -41,7 +41,7 @@ jobs:
       - run: docker build -t $IMAGE_NAME .
       - snyk/scan:
           docker-image-name: $IMAGE_NAME
-          
+
   build-and-push:
     executor: docker/docker
     steps:
