@@ -26,7 +26,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: |
-          echo "running  test...."
+          echo "running   test...."
           npm test
 
   scan:
